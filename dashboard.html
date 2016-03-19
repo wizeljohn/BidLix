@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BidLix Philippines</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome.min.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/ElizaScript.js"></script>
+    <style>
+      #body{
+        background-color:#eeeeee;
+      }
+      #divHeader{
+        background-color: #fff;
+      }
+    </style>
+
+
+  </head>
+
+  <body id="body"> 
+
+  <div class="container" id="divHeader">
+    <br>
+    <center>
+      <div id="Nonheaderpic">
+        <img src="image/bidlix.png" style="width:80px;height:80px;">
+      </div>
+
+      <div id="Headerpic"></div>
+    </center>
+    <br>
+  </div>
+   <div id="divSender"></div>
+
+  <!--=============================================================================
+                    S T A R T   O F   N A V B A R  
+  ============================================================================== -->
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#">Dashboard</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li id="pgBrowseItem"><a href="index.html">Browse Item<span class="fa fa-list-alt fa-pull-right fa-2x"></span></a></li>
+          <li class="active"><a href="#">Dashboard <span class="fa fa-bar-chart fa-pull-right fa-2x"></a></li>
+          <li><a href="additem.html">Add Item <span class="fa fa-plus-circle fa-pull-right fa-2x"></span></a></li>
+           <li id="liProfile"><a href="profile.html">Profile <span class="fa fa-user fa-pull-right fa-2x"></span></a></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!--=============================================================================
+                    E N D   O F   N A V B A R 
+  ============================================================================== -->
+
+
+
+  <!--======== START DIV CONTAINER ============-->
+  <div class="container">
+      <div class="jumbotron">
+        <center>
+        <p id="txtTitle">Top 3 Latest Item</p>
+        </center>
+      </div>
+
+      <div id="divLatest"><center><span class="fa fa-spinner fa-3x fa-pulse"></span></center> </div>
+
+
+      <div class="jumbotron">
+        <center>
+        <p id="txtTitle">Highest Bidder Highlight</p>
+        </center>
+      </div>
+
+      <div class="list-group" id="aHighest" data-toggle='modal' data-target='#mdlHighest' onclick='highestBid()'>
+        <div class="list-group-item">
+
+          <center><img src="" height="100px" width="100px" id="imgItemm">
+          <h4 class='p' id="divHighest"></h4></center>
+        </a>
+      </div>
+
+  </div>
+  <!--======== START DIV CONTAINER ============-->
+
+  <!--======== START HIGHEST BIDDER MODAL ============ -->
+  <div class="modal fade" id="mdlHighest" role="dialog">
+      <style>
+        #mdlimage{
+          width : 100%;
+          height : 300px;
+        }
+      </style>
+      <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">Highest Bidder</h3>
+        </div>
+
+        <div class="modal-body">
+          <div id="divHighestModal"></div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+    </div>
+
+      
+
+  </div>
+  <div id="divMdlScript"></div>
+
+  <!--======== END HIGHEST BIDDER MODAL=============== -->
+
+  <!--======== START DIV MODAL=================-->
+  <div class="modal fade" id="divMdl" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">Content</h3>
+        </div>
+        <div class="modal-body">
+          <center>
+          <img id="mdlimage" style="width:200px; height:200px;">
+          <hr>
+              <p id="mdlname">Description : </p>
+              <p id="mdlcondition">Condition: </p>
+              <p id="mdluser">Posted By:</p>
+              <p>Expiration: <span id="countdown"></span></p>
+              
+          </center>
+          <div class="btn-group btn-group-justified">
+            <a href="#MdlSuggest" class="btn btn-success" style="width:50%;" data-toggle="modal" onClick="suggestuser()">Suggest Price</a>
+            <a href="#MdlPrice" class="btn btn-success" style="width:50%;" data-toggle="modal" id="PriceView">View Price</a>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL=================-->
+
+    <!--======== START DIV MODAL FOR SUGGEST=================-->
+  <div class="modal fade" id="MdlSuggest" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">Suggest</h3>
+        </div>
+
+        <div class="modal-body">
+          <br>
+          <form class="form-horizontal" id="frmSuggest">
+            
+            <input type="text" id="txtPostId" name="txtSuggestPost"/>
+            <div class="form-group">
+              <label class="control-label">Username:</label>
+              <input type="text" class="form-control" placeholder="Username" id="suggestUser" name="txtSuggestUser" readonly/>
+            </div>
+            
+            <div class="form-group">
+              <label class="control-label">Input Price:</label>
+              <input type="number" class="form-control" placeholder="Enter suggest price." id="suggestPrice" name="txtSuggestPrice">
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Input Note:</label>
+              <input type="text" class="form-control" placeholder="Enter notes." id="suggestNotes" name="txtSuggestNotes">
+            </div>
+            <br>
+          </form>
+          <button class="btn btn-success btn-block" id="btnSuggestSave">Submit</button>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL FOR SUGGEST=================-->
+
+
+  <!--======== START DIV MODAL FOR SUGGEST=================-->
+  <div class="modal fade" id="MdlPrice" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">List of Price</h3>
+        </div>
+
+        <div class="modal-body">
+          <center><h3>Suggest Prices</h3></center>
+          <div id="divView"><center><span class="fa fa-spinner fa-3x fa-pulse"></span></center></div>
+          <div id="divSuggestPriceScript"></div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL FOR SUGGEST=================-->
+
+   <!--======== START DIV MODAL FOR MESSAGE=================-->
+  <div class="modal fade" id="MdlMessage" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">Messages</h3>
+        </div>
+
+        <div class="modal-body">
+          <form id="frmMessage">
+
+            <div class="form-group">
+              <label for="txtSender" class="col-lg-2 control-label">Sender: </label>
+              <div class="col-lg-10">
+                <input type="text"  class="form-control" name="txtSender" id="txtSender" readonly/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="txtSender" class="col-lg-2 control-label">Reciever: </label>
+              <div class="col-lg-10">
+                <input type="text"  class="form-control" name="txtReciever" id="txtReciever" readonly/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="txtSender" class="col-lg-2 control-label">Input your message: </label>
+              <div class="col-lg-10">
+                  <textarea name="txtmesContent"  id ="txtMessage" class="form-control" placeholder="Enter your message."></textarea>
+              </div>
+            </div>
+            <button id="btnMessage" class="btn btn-success btn-block">Send</button>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL FOR MESSAGE=================-->
+  <div id="divScript"></div>
+
+  <script>
+  $(document).ready(function(){
+
+    //============ Function to show user profile pic on heaader 
+    var user = localStorage.getItem('localUser');
+    if(localStorage.getItem('localUser') != "") {
+        $("#Nonheaderpic").hide();
+        $("#Headerpic").show();
+
+      }
+      else{
+        $("#Nonheaderpic").show();
+        $("#Headerpic").hide();
+      }
+
+        $.ajax({
+        type:'POST',
+        url:'http://gcccs.org/largo/best/userpic.php',
+        dataType:'html',
+        data:{
+          sql: user
+        },
+        success:function(data){
+          if(data){
+            $('#Headerpic').html(data);
+          }
+        }
+      });
+    //============ Function to show user profile pic on heaader 
+    /// ======== START FUNCTION FOR 3 LATEST ITEM =============
+    $.ajax({
+    type: 'GET',
+    url:'http://gcccs.org/largo/best/largolatest.php',
+    dataType:'html',
+    data: {},
+    success: function(data){
+      if(data){
+        $('#divLatest').html(data); 
+      }
+    }
+    
+    });
+    /// ======== END FUNCTION FOR 3 LATEST ITEM =============
+
+    /// ======== START FUNCTION FOR HIGHEST BIDDER ==========
+        $.ajax({
+        type : 'GET',
+        url : 'http://gcccs.org/largo/best/highestbidder.php',
+        success : function(ralphlargo){
+          if(ralphlargo){
+            $("#divHighest").html(ralphlargo)
+            var highest_bidder = [];
+            var highest_bidder_bids = [];
+
+            (function largogaming() {
+                
+                array_elements = names;
+                array_elements.sort();
+                var current = null;
+                var cnt = 0;
+                for (var i = 0; i < array_elements.length; i++) {
+                    if (array_elements[i] != current) {
+                        if (cnt > 0) {
+                            highest_bidder[highest_bidder.length] = (current);
+                            highest_bidder_bids[highest_bidder_bids.length] = (cnt); 
+                        }
+                        current = array_elements[i];
+                        cnt = 1;
+                    } else {
+                        cnt++;
+                    }
+                }
+
+                if (cnt > 0) {
+                     highest_bidder[highest_bidder.length] = (current);
+                     highest_bidder_bids[highest_bidder_bids.length] = (cnt); 
+                }
+
+            })();
+
+            var longest = 0;
+
+            for(i=0;i<highest_bidder_bids.length;i++){
+                if(highest_bidder_bids[i] > longest){
+                    longest = highest_bidder_bids[i]
+                }
+            }
+            var ralphlargoLong = highest_bidder[highest_bidder_bids.indexOf(longest)];
+            $("#divHighest").html(ralphlargoLong);
+            $("#aHighest").attr("onclick","highestBid('"+ralphlargoLong+"')");
+
+            $.ajax({
+              type : 'POST',
+              url : 'http://gcccs.org/largo/best/highestbidpic.php',
+              data : {sql : ralphlargoLong},
+              success : function (data){
+                if(data){
+                  $("#divMdlScript").html(data);
+                  $("#imgItemm").attr("src",pic);
+                }
+              }
+            });
+          }
+        }
+      });
+      /// ======== START FUNCTION FOR HIGHEST BIDDER ==========
+
+    //==========function to send message to your buyer ===========
+
+    $("#btnMessage").click(function(){
+      var mesform = $("#frmMessage").serialize();
+      $.ajax({
+        type:'POST',
+        url:'http://gcccs.org/largo/best/SendMessage.php',
+        data:mesform,
+        dataType:'html',
+        success: function(mes){
+          if(mes){
+            alert("You have successfully send your message.");
+            $("#txtMessage").val("");
+          }
+
+        }
+      });
+    });
+
+    // ======== End function to send message to your buyer ======
+
+        //===========START FUNCTION FOR ADDING SUGGEST PRICE======
+    $("#btnSuggestSave").click(function(data){
+      var a = localStorage.getItem('bas_user');
+      var b = localStorage.getItem('localUser');
+
+      var user = $('#suggestUser').val();
+
+      var form = $('#frmSuggest').serialize();
+        if(a==b) {
+          alert("Cannot suggest price. Youre the one who posted that item!");
+        }
+
+        else if(user != ""){
+          $.ajax({
+          type : 'POST',
+          url : 'http://gcccs.org/largo/best/suggest.php',
+          data: form,
+          dataType : 'html',
+          success : function (bidlix){
+          if (bidlix){
+              alert("Successfully suggest your price.");
+              location.href = "index.html";
+            }
+          }
+          });
+        }
+        else {
+          alert("Login youre account first. Thank you.");
+        }
+
+      });
+      //===========END FUNCTION FOR ADDING SUGGEST PRICE======
+
+  });
+
+  /// =========== START FUNCTION FOR GETTING HIGHEST BIDDER ======
+      function highestBid(ralphlargo){
+      localStorage.setItem('Bidder', ralphlargo);
+      var blue = localStorage.getItem('Bidder');
+      $.ajax({
+        type : 'POST',
+        dataType: 'html', 
+        url : 'http://gcccs.org/largo/best/highestUser.php',
+        data : {sql : blue},
+        success : function(azil){
+          if(azil){
+            $("#divHighestModal").html(azil)
+          }
+        }
+      });
+    }
+    /// =========== END FUNCTION FOR GETTING HIGHEST BIDDER ======
+
+    // ======== Start function to send message to your buyer ======
+      function lnkMessage(id){
+      var user = localStorage.getItem('localUser');
+      document.getElementById("txtSender").value = user;
+
+      $.ajax({
+        type : 'POST',
+        url: 'http://gcccs.org/largo/best/SellItem.php',
+        data: {
+        sql:id
+      },
+        success : function(data){
+          if(data){
+            $("#divSellItem").append(data);
+            var rec = document.getElementById('txtReciever').value = nameItem;
+            localStorage.setItem('Reciever',rec);
+            var eliza = localStorage.getItem('Sell');
+            var post = localStorage.getItem('post_id');
+        }
+        }
+      });
+
+      }
+
+      ///============== function to sell your item to other user===============
+        function SellSuggest(id){
+      $.ajax({
+        type : 'POST',
+        url: 'http://gcccs.org/largo/best/SellItem.php',
+        data: {
+        sql:id
+      },
+        success : function(data){
+          if(data){
+            $("#divSellItem").append(data);
+            var item = document.getElementById('sampleSell').innerHTML = nameItem;
+            var price = document.getElementById('samplePrice').innerHTML = priceItem;
+
+            localStorage.setItem('Sell',item);
+            localStorage.setItem('Price',price);
+            var eliza = localStorage.getItem('Sell');
+            var a = localStorage.getItem('Price');
+            var post = localStorage.getItem('post_id');
+ 
+            $.ajax({
+              type : 'POST',
+              url : 'http://gcccs.org/largo/best/sell.php',
+              data :"Sell="+eliza+"&Price="+a+"&postId="+post,
+              dataType: 'html',
+              success : function(bidlix){
+                if(bidlix){
+                alert('Successfully send to buyer and wait for confirmation.');
+                location.reload();
+                }
+              }
+            });
+        }
+        alert("You choose "+eliza+" to buy your item.");
+        }
+      });
+
+    } 
+
+     ///============== function to sell your item to other user===============
+
+  </script>
+  </body>
+</html>
+

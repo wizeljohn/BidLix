@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BidLix Philippines</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome.min.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/ElizaScript.js"></script>
+    
+    <style>
+      #body{
+        background-color:#eeeeee;
+      }
+      #divHeader{
+        background-color: #fff;
+      }
+    </style>
+
+
+  </head>
+
+  <body id="body"> 
+
+  <div class="container" id="divHeader">
+    <br>
+    <center>
+      <div id="Nonheaderpic">
+        <img src="image/bidlix.png" style="width:80px;height:80px;">
+      </div>
+      <div id="Headerpic"></div>
+    </center>
+    <br>
+  </div>
+
+  <!--=============================================================================
+                    S T A R T   O F   N A V B A R  
+  ============================================================================== -->
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#">Profile</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li id="pgBrowseItem"><a href="index.html">Browse Item<span class="fa fa-list-alt fa-pull-right fa-2x"></span></a></li>
+          <li><a href="dashboard.html">Dashboard <span class="fa fa-bar-chart fa-pull-right fa-2x"></a></li>
+          <li><a href="additem.html">Add Item <span class="fa fa-plus-circle fa-pull-right fa-2x"></span></a></li>
+           <li id ="btnProfile" class="active"><a href="#">Profile <span class="fa fa-user fa-pull-right fa-2x"></span></a></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!--=============================================================================
+                    E N D   O F   N A V B A R 
+  ============================================================================== -->
+  
+  <!--==================== START OF USER PROFILE MENU ==================-->
+  <div class="container" id="divProfileMenu">
+    <div class="list-group">
+
+      <div class="list-group-item" id="divUser">
+        <span class="fa fa-info-circle fa-pull-left "></span> <span></span> <p class="list-group-item-heading">User Profile</p>
+      </div>
+
+      <div class="list-group-item" id="divSell">
+        <span class="fa fa-shopping-cart fa-pull-left "></span> <span></span> <p class="list-group-item-heading">Selling Item</p>
+      </div>
+
+      <div class="list-group-item" id="divSold">
+        <span class="fa fa-check-circle fa-pull-left "></span> <span></span> <p class="list-group-item-heading">Sold Item</p>
+      </div>
+
+      <div class="list-group-item" id="divBought">
+        <span class="fa fa-tag fa-pull-left "></span> <span></span> <p class="list-group-item-heading">Bought Item</p>
+      </div>
+
+      <div class="list-group-item" id="divBuy">
+        <span class="fa fa-bookmark fa-pull-left "></span> <span></span> <p class="list-group-item-heading">Buying Item</p>
+      </div>
+
+      <div class="list-group-item" id="divPending">
+        <span class="fa fa-hourglass fa-pull-left "></span> <span></span> <p class="list-group-item-heading">Pending Item</p>
+      </div>
+
+      <div class="list-group-item" id="divMessageRec">
+        <span class="fa fa-envelope fa-pull-left "></span> <span></span> 
+        <p class="list-group-item-heading">Message  
+        <span class="badge fa fa-pull-right" id="msgbadgeP">0</span></p> 
+      </div>
+
+       <ul class="nav nav-pills" id="divAdmin" style="background-color:#fff;border:1px solid transparent;border-color:#ddd;">
+        <li class="dropdown" style="width:100%;">
+          <a class="dropdown-toggle" data-toggle="dropdown" style="font-size:20px;text-align:center;" href="#" >
+            Admin<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" style="text-align:center;width:100%;">
+            <li><a href="#MdlUserRecords" data-toggle="modal">User Records </a></li>
+            
+            <li class="divider"></li>
+            <li><a href="#MdlItemRec" onclick="loadApproveItem()" data-toggle="modal">Item Records</a></li>
+
+            <li class="divider"></li>
+            <li><a href="#MdlSuggestRec" data-toggle="modal" onclick="loadSuggest()">Suggest Records</a></li>
+
+
+          </ul>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+  <!--========================START USER PROFILE PAGE=======================-->
+  <div class="container" id="profileContainer">
+    <center><h3 id="Menutitle">User Profile</h3></center>
+    <div id="NonUser">
+      <center>
+        <img src="image/userdefault.png" style="width:60%;height:150px;">
+        <br><br>
+        <a href="login.html" class="btn btn-success" style="width:60%">Login</a>
+      </center>
+    </div>
+      <div id="divProfile"></div>
+  </div>
+
+  <div class="container" id="ItemContainer">
+    <center><h3 id="Menutitle">User Item</h3></center>
+      <div id="divItem"><center><span class="fa fa-spinner fa-3x fa-pulse"></span></center></div>
+  </div>
+
+  <div class="container" id="MessageContainer">
+    <center><h3 id="Menutitle">Messages</h3></center>
+      <div id="divMessage"></div>
+      <div id="divMessageRead"></div>
+  </div>
+  <!--========================END USER PROFILE PAGE=======================-->
+
+
+  <!--==================== END OF USER PROFILE MENU ==================-->
+
+  <!--======== START DIV MODAL=================-->
+  <div class="modal fade" id="divMdl" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">Content</h3>
+        </div>
+        <div class="modal-body">
+          <center>
+          <img id="mdlimage" style="width:200px; height:200px;">
+          <hr>
+              <p id="mdlname">Description : </p>
+              <p id="mdlcondition">Condition: </p>
+              <p id="mdluser">Posted By:</p>
+              <p>Expiration: <span id="countdown"></span></p>
+          </center>
+          <div class="btn-group btn-group-justified">
+
+            <a href="#MdlSuggest" class="btn btn-success" style="width:50%;" data-toggle="modal" onClick="suggestuser()">Suggest Price</a>
+
+            <a href="#MdlPrice" class="btn btn-success" style="width:50%;" data-toggle="modal" id="PriceView">View Price</a>
+            
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL=================-->
+
+    <!--======== START DIV MODAL=================-->
+  <div class="modal fade" id="divMdlNew" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">Content</h3>
+        </div>
+        <div class="modal-body">
+          <center>
+          <img id="mdlimage" style="width:200px; height:200px;">
+          <hr>
+              <p id="mdlname">Description : </p>
+              <p id="mdlcondition">Condition: </p>
+              <p id="mdluser">Posted By:</p>
+              <p>Expiration: <span id="countdown"></span></p>
+          </center>
+          <div class="btn-group btn-group-justified">
+            <a href="#MdlPrice" class="btn btn-success" style="width:50%;" data-toggle="modal" id="PriceView">View Price</a>
+            
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL=================-->
+
+  <!--======== START DIV MODAL FOR SUGGEST=================-->
+  <div class="modal fade" id="MdlSuggest" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">Suggest</h3>
+        </div>
+
+        <div class="modal-body">
+          <br>
+          <form class="form-horizontal" id="frmSuggest">
+            
+            <input type="text" id="txtPostId" name="txtSuggestPost"/>
+            <div class="form-group">
+              <label class="control-label">Username:</label>
+              <input type="text" class="form-control" placeholder="Username" id="suggestUser" name="txtSuggestUser" readonly/>
+            </div>
+            
+            <div class="form-group">
+              <label class="control-label">Input Price:</label>
+              <input type="number" class="form-control" placeholder="Enter suggest price." id="suggestPrice" name="txtSuggestPrice">
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Input Note:</label>
+              <input type="text" class="form-control" placeholder="Enter notes." id="suggestNotes" name="txtSuggestNotes">
+            </div>
+            
+            
+            <br>
+          </form>
+          <button class="btn btn-success btn-block" id="btnSuggestSave">Submit</button>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL FOR SUGGEST=================-->
+
+
+  <!--======== START DIV MODAL FOR SUGGEST=================-->
+  <div class="modal fade" id="MdlPrice" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">List of Price</h3>
+        </div>
+
+        <div class="modal-body">
+          <center><h3>Suggest Prices</h3></center>
+          <p>Sell your item with:<div id="sampleSell"></div>
+          <p>With a price of:<div id="samplePrice"></div><p>
+          <div id="divView"></div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL FOR SUGGEST=================-->
+
+  <!--======== START DIV MODAL FOR SUGGEST=================-->
+  <div class="modal fade" id="MdlUserRecords" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">User Records</h3>
+        </div>
+
+        <div class="modal-body">
+          <h3>Request for Approval</h3>
+          <div id="divUserRec"></div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL FOR SUGGEST=================-->
+
+  <!--======== START DIV MODAL FOR SUGGEST=================-->
+  <div class="modal fade" id="MdlItemRec" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">Item Records</h3>
+        </div>
+
+        <div class="modal-body">
+          <h3>Request for Approval</h3>
+          <div id="divItemRec"></div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL FOR SUGGEST=================-->
+
+  <!--======== START DIV MODAL FOR SUGGEST=================-->
+  <div class="modal fade" id="MdlSuggestRec" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">Suggest Records</h3>
+        </div>
+
+        <div class="modal-body">
+          <h3>Request for Approval</h3>
+          <div id="divSuggRec"></div>
+          <div id="divSuggestPriceScript"></div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL FOR SUGGEST=================-->
+    <!--======== START DIV MODAL FOR SUGGEST=================-->
+  <div class="modal fade" id="ModalMessage" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" onclick="updateMesStatus()"data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">Your Message</h3>
+        </div>
+
+        <div class="modal-body">
+          <div id="divOpenMes"><center><span class="fa fa-spinner fa-3x fa-pulse"></span></center></div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" onclick="updateMesStatus()"data-dismiss="modal">Close</button>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL FOR SUGGEST=================-->
+
+   <!--======== START DIV MODAL FOR MESSAGE=================-->
+  <div class="modal fade" id="MdlMessage" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+          <h3 class="modal-title">Messages</h3>
+        </div>
+
+        <div class="modal-body">
+          <form id="frmMessage">
+
+            <div class="form-group">
+              <label for="txtSender" class="col-lg-2 control-label">Sender: </label>
+              <div class="col-lg-10">
+                <input type="text"  class="form-control" name="txtSender" id="txtSender" readonly/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="txtSender" class="col-lg-2 control-label">Reciever: </label>
+              <div class="col-lg-10">
+                <input type="text"  class="form-control" name="txtReciever" id="txtReciever" readonly/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="txtSender" class="col-lg-2 control-label">Input your message: </label>
+              <div class="col-lg-10">
+                  <textarea name="txtmesContent"  id ="txtMessage" class="form-control" placeholder="Enter your message."></textarea>
+              </div>
+            </div>
+
+          </form>
+          <button id="btnMessage" class="btn btn-success btn-block">Send</button>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+         </div>
+
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL FOR MESSAGE=================-->
+
+
+
+
+  <!--======== START DIV MODAL FOR SUGGEST=================-->
+  <div class="modal fade" id="MdlTerms" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">Terms and Condition</h3>
+        </div>
+
+        <div class="modal-body">
+          <div id="divTermsRec"></div>
+          <input type="checkbox" id="chkterm" value="1"> Agree with <a href="#Terms" data-toggle="modal">terms and condition of item. </a>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" id="btnAgreeTerm">Yes</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+         </div>
+
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL FOR SUGGEST=================-->
+
+  <!--======== START DIV MODAL FOR SUGGEST=================-->
+  <div class="modal fade" id="MdlTermsView" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">Terms and Condition</h3>
+        </div>
+
+        <div class="modal-body">
+          <div id="divViewTerms"></div>
+          <a href="#Terms" data-toggle="modal">Policy and Condition</a>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+         </div>
+
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL FOR SUGGEST=================-->
+
+    <!--======== START DIV MODAL FOR SUGGEST=================-->
+  <div class="modal fade" id="MdlDeclineItem" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">Decline Item</h3>
+        </div>
+
+        <div class="modal-body">
+          <center><h3>Are you sure you want to decline this item?</h3></center>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" onclick="controller.decline()">Yes</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL FOR SUGGEST=================-->
+
+  <!--======== START DIV MODAL FOR terms and condition=================-->
+  <div class="modal fade" id="MdlTermsandCondition" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+              <h3 class="modal-title">Terms and Condition</h3>
+        </div>
+
+        <div class="modal-body">
+         <form id="formterm">
+          <div class="form-group">
+            <label class="control-label" for="txtName">Username:</label>
+            <input class="form-control" type="text" name="txtName" id="txtName" readonly/>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="txtItem">Item:</label>
+            <input class="form-control" type="text" name="txtItem" id="txtItem" readonly/>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="txtpolicy">Date to meet:</label>
+            <input type="date" name="txtPolicy" id="txtpolicy" class="form-control" placeholder="Enter date."/>
+          </div>
+
+
+          <div class="form-group">
+            <label class="control-label">Time to meet:</label>
+            <input type="number" min="1" max="12" 
+              onKeyUp="if(this.value>12){this.value='12';}else if(this.value<0){this.value='0';}"
+            id="time1">
+            <input type="number" min="0" max="60" 
+              onKeyUp="if(this.value>60){this.value='60';}else if(this.value<0){this.value='0';}"
+            id="time2">
+            <select id="slcTime">
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="txtplace">Place to meet:</label>
+            <input name="txtPlace" id="txtplace" class="form-control" placeholder="Enter the place."/>
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" id="terms"> <a href="#Terms" data-toggle="modal"> Agree with the terms and condition of item. </a>
+            </label>
+          </div>
+
+         </form>
+         <button class="btn btn-success btn-block" id="btnAddterm">Submit</button>
+        </div>
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+         </div>
+      </div>
+    </div>
+  </div>
+  <!--======== END DIV MODAL FOR SUGGEST=================-->
+
+  <!--======== END DIV MODAL FOR SUGGEST=================-->
+  <div class="modal" id="Terms" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+          <h4 class="modal-title">Terms and Condition</h4>
+        </div>
+        <div class="modal-body">
+          Terms & Conditions
+
+<br>
+1. Definitions & Interpretation
+<br>
+Unless otherwise defined, the definitions and provisions in respect of interpretation set out in Schedule 1 will apply to these Terms & Conditions of Bidding.
+<br>
+2. Purchase of Products
+<br>
+2.1 Your compliance: You agree to comply with any and all the guidelines, notices, operating rules and policies and instructions pertaining to the purchase of Products through the Platform, as well as any amendments to the aforementioned, issued by BidLix Philippines (whether as part of use of the Platform or in relation to the purchase of Products, on behalf of Seller), from time to time. BidLix reserves the right to revise these guidelines, notices, operating rules and policies and instructions at any time and you are deemed to be aware of and bound by any changes to the foregoing upon their publication on the Platform.
+<br>
+2.2 Sellers: Products are sold by “Sellers”. Registered User may be a “Seller” for selected Products. Whether a particular Product is listed for sale on the Platform register user may be stated on the app page listing that Product. Products sold to you by Sellers will be governed by individual Customer Contracts (more details below in Clause 2.6) which:
+<br>
+2.2.2 for Products sold by user, shall be agreements entered into directly and only between other user and you.
+2.3 Product description: While Seller endeavours to provide an accurate description of the Products, Seller warrants that such description is accurate, current or free from error. In the event that the Product you receive is of a fundamentally different nature from the Product as described on the Platform and which you have ordered thru bidding, Clause 6 of these Terms & Conditions of Sale shall apply.
+<br>
+2.4 Placing your Order: You may place an Order by successfully win in bidding on the Platform and clicking on the “Submit Order button. Seller will not accept Orders placed in any other manner. You shall be responsible for ensuring the accuracy of the Order.
+<br>
+2.5 You have the right to cancel your order within twenty-four hours from the time of your order. The cancellation must be communicated thrue deadline given by seller. Upon the expiration of the 24 hours deadline, all Orders are irrevocable and unconditional: All Orders will be deemed to be irrevocable and unconditional upon transmission through the Platform and Seller shall be entitled (but not obliged) to process such Order(s) without your further consent and without any further reference or notice to you. Nevertheless, in certain circumstances as stated in Clause 8, you may request to cancel or amend the Order which Seller will endeavour to give effect to on a commercially reasonable effort basis. However, notwithstanding the foregoing, Seller is not obliged to give effect to any request to cancel or amend any Order. The details regarding the cancellation process and policy of BidLix can be accessed here.
+<br>
+2.6 Seller’s reservation of rights in respect of Orders: All Orders shall be subject to Seller’s acceptance in its bidder and each Order accepted by Seller (such accepted Order to be referred to as a “Customer Contract”) shall constitute a separate contract. You acknowledge that unless you receive a notice from Seller confirming your Order, Seller shall not be party to any legally binding agreements or promises made between Seller and you for the sale or other dealings with the Product(s) and accordingly Seller shall not be liable for any Losses which may be incurred as a result. For the avoidance of doubt, Seller reserves the right to decline to process or accept any Order received from or through the Platform in its absolute discretion.
+<br>
+2.7 Termination by Seller in the event of pricing error: Seller reserves the right to terminate the Customer Contract, in the event that a Product has been mispriced on the Platform, in which event BidLix shall, on behalf of Seller, notify you of such cancellation by giving three days’ notice. Seller shall have such right to terminate such Customer Contract whether or not Products have been dispatched or are in transit and whether payment has been charged to you. Upon termination of the Customer Contract under this clause, the Seller shall refund the payment charged to you for the Product.
+<br>
+2.8 Product Warranty: The warranties with respect to a Product (“Product Warranty”) sold under a Customer Contract shall be as stated by Seller via the Platform, under the “Specifications” tab in the field “Product Warranty” for the relevant Product, and shall be limited by the terms and conditions therein. The warranties and conditions, remedies for breach of warranty or condition, or other terms stated in the Product Warranty are, unless expressly prohibited by applicable mandatory law, in lieu of all other terms, warranties and conditions, whether expressed or implied, statutory or otherwise. Except as expressly provided in such Product Warranty, Seller excludes (unless expressly prohibited by applicable mandatory law) all other express or implied terms, warranties or conditions with respect to the Products supplied.
+<br>
+2.9 Customer’s acknowledgement: You acknowledge and warrant that you have not relied on any term, condition, warranty, undertaking, inducement or representation made by or on behalf of Seller which has not been stated expressly in a Customer Contract or upon any descriptions or illustrations or specifications contained in any document including any catalogues or publicity material produced by either BidLix or Seller. You also acknowledge and agree that to the extent allowed under Philippine law, the exclusion of warranties, exclusion of liability and exclusion of remedies in these Terms & Conditions of Sale and Customer Contracts allocate risks between the parties and permit Seller to provide the Products at lower fees or prices than Seller otherwise could and you agree that such exclusions on liability are reasonable.
+<br>
+2.10 No representations or warranties: Without prejudice to the generality of the foregoing Clause 2.9 and to the extent allowed under Philippine law:
+
+2.10.1 no condition is made or to be implied nor is any warranty given or to be implied as to the life or wear of the Products supplied or that they will be suitable for any particular purpose or use under any specific conditions, notwithstanding that such purpose or conditions may be known or made known to Seller;<br>
+2.10.2 any actions arising from the breach of any warranty or representation, or any right to damages, whether express or implied, shall be extinguished if an action is not brought against BidLix within six months from the date of delivery, or from the scheduled delivery of the Product.<br>
+2.10.3 BidLix shall not be liable for any indirect, incidental, special, consequential or exemplary damages, including, but not limited to, damages for loss of profits, goodwill, intangible losses, and any other type of damages caused by any breach of a Third Party Vendor’s implied or express warranty on the Products;
+2.10.4 for products shipped internationally, please note that any manufacturer warranty may not be valid; manufacturer service options may not be available; product manuals, instructions and safety warnings may not be in destination country languages; the products (and accompanying materials) may not be designed in accordance with destination country standards, specifications, and labelling requirements;<br>
+2.10.5 Seller is not liable for any Losses suffered by any third party directly or indirectly caused by repairs or remedial work carried out without BidLix prior written approval and the Customer shall indemnify Seller against all Losses arising out of such claims;<br>
+2.10.6 Seller shall be under no liability under the above warranty (or any other warranty, condition or guarantee) if the total price for the Products has not been paid in cleared funds by the due date for payment; and<br>
+2.10.7 To the extent allowed under Philippine law, Seller shall be under no liability whatsoever in respect of any defect in the Products arising after the expiry of the applicable Product Warranty, if any.
+2.11 Intellectual Property:<br>
+
+2.11.1 Unless the prior written consent of BidLix has been obtained, the Customer shall not remove or alter the trade marks, logos, copyright notices, serial numbers, labels, tags or other identifying marks, symbols or legends affixed to any Products.<br>
+2.11.2 Where software applications, drivers or other computer programmes and/or all other design details, technical handbooks or manuals, drawing or other data (all collectively referred to as “Product Materials”) are supplied to the Customer by Seller in connection with the Order, the use and retention of the Product Materials are subject to the terms and conditions of licence or use (such as end-user licences, restrictions or conditions of use) as may be prescribed by Seller or its licensors and must not be used other than strictly in accordance with such terms and conditions.<br>
+2.11.3 The Customer agrees and acknowledges that the Product Materials shall remain the property of Seller or its licensors. The Customer further agrees that any and all Intellectual Property embodied in or relating to the Product Materials shall remain the sole and exclusive property of Seller or its licensors. Unless otherwise expressly provided in the Order or the prior written consent of customer has been obtained, the Customer undertakes to return the Product Materials and/or any copies thereof upon customer request.<br>
+
+
+3. Delivery of Products<br>
+
+3.1 Address: Delivery of the Products shall be made to the address you specify in your Order either by Seller.<br>
+
+3.2 Shipping & packing charges: Shipping and packing charges shall be as set out in the Order.<br>
+
+3.4 Delivery timeframe: You acknowledge that delivery of the Products is subject to availability of the Products. Seller will make every reasonable effort to deliver the Product to you within the delivery timeframe stated on the relevant page on which the Product is listed, but you acknowledge that while stock information on the Platform is updated regularly, it is possible that in some instances a Product may become unavailable between updates. All delivery timeframes given are estimates only and delays can occur. If the delivery of your Product is delayed Seller will inform you accordingly via e-mail and your Product will be dispatched as soon as it becomes available to Seller. The time for delivery shall not be of the essence, and Seller (nor any of its agents) shall not be liable for any delay in delivery whatsoever caused.<br>
+
+3.5 Deemed receipt: In the event you do not receive the Product by the projected delivery date and provided that you inform Seller within 3 days immediately from such projected delivery date, Seller will try, to the best of Seller’s ability, to locate and deliver the Product. If Seller does not hear from you within 3 days from such projected delivery date, you shall be deemed to have received the Product subject to your rights under Philippine law.<br>
+
+3.6 Customer’s failure to take delivery: If the Customer fails to take delivery of the Products (otherwise than by reason of any cause beyond the Customer's reasonable control or by reason of Seller’s fault) then without prejudice to any other right or remedy available to Seller, Seller may terminate the Customer Contract.<br>
+
+4. Prices of Products<br>
+
+4.1 Listing Price: The price of the Products payable by a Customer shall be the Listing Price at the time at which the Order placed by the Customer is transmitted to Seller (through the Platform).<br>
+
+4.2 Taxes: All Listing Prices are subject to taxes, unless otherwise stated. Seller reserves the right to amend the Listing Prices at any time without giving any reason or prior notice.<br>
+
+5. Payment<br>
+
+5.1 General: You may pay for the Product using any door to door delivery or pick-up pay method thrue carriers payment. When you place an Order, actual payment will be only charged upon Seller’s acceptance of your Order and formation of a Customer Contract. All payments shall be made to cariers payment, either accepting payment in its own right or as Seller’s agent (where Seller is a Third Party Vendor).<br>
+
+5.2 Additional terms: The payment methods may be subject to additional terms as prescribed by BidLix from time to time.<br>
+
+5.3 Payment methods: You agree that you are subject to the applicable user agreement of your payment method. You may not claim against Seller or any of its agents (which may include BidLix), for any failure, disruption or error in connection with your chosen payment method. 
+<br>
+5.4 Invoicing: Seller may invoice you using carriers payment option that agreed by seller and buyer upon the due date of any payment under a Customer Contract.<br>
+
+5.5 Failure to pay: If the Customer fails to make any payment pursuant to the terms and conditions of the payment method elected or payment is cancelled for any reason whatsoever, then without prejudice to any other right or remedy available to Seller, Seller shall be entitled to cancel the Customer Contract or suspend delivery of the Products until payment is made in full.
+<br>
+5.6 Refund of Payment:<br>
+
+5.6.1 All refunds shall be made via the original payment mechanism and to the person who made the original payment,  for Cash on Delivery, where refunds will be made via bank transfer or store credit into the individual’s bank account provided that complete and accurate bank account details are provided to us.<br>
+5.6.2 We offer no guarantee of any nature for the timeliness of the refunds reaching your account. The processing of payment may take time and it is subject to the respective banks and/or payment provider internal processing timeline.<br>
+5.6.3 All costs associated with the refund process imposed by the processing bank and/or payment provider shall be borne by us.<br>
+5.6.4All refunds are conditional upon our acceptance of a valid return of the Product.<br>
+5.6.6. The guidelines regarding the refunds process of BidLix can be accessed here.<br>
+
+6. Returns/Repairs/Replacements<br>
+
+6.1 Return Policy: All returns must be done in accordance with the instructions set out in the Return Policy here. Seller is not obliged to agree to any return unless all such instructions are followed to Seller. Should Seller agree to the return, Seller will deliver the replacement Product to your specified address.<br>
+
+6.2 Permitted returns: Subject to Clause 6.1, within 14 days for items covered under Satisfaction Guaranteed, and 7 days for items covered under 100% Buyer Protection, from the date of delivery of the Product, you may return a Product when you:<br>
+
+6.2.1 receive a product that is fundamentally different in nature from the Product specified in the Customer Contract;<br>
+6.2.2 receive a faulty or damaged Product;<br>
+6.2.3 receive a product that is not as advertised on the platform;<br>
+6.2.4 wrong item is delivered;<br>
+6.2.5 receive a product that has missing parts/items; or<br>
+6.2.6 receive a product that does not fit (for fashion items).<br>
+6.3 Repair, replacement or price reduction: As an alternative to returning faulty or damaged Products under Clause 6.2, a Customer may request for a repair or replacement of such Products. Such request shall be irrevocable upon notification of the request to BidLix and the Customer may not later elect for a return under Clause 6.2. Where the Products have not been repaired or replaced within a reasonable time, BidLix may, at its sole discretion, grant to the Customer a reduction of the price in proportion to the reduced value of the Products, provided that under no circumstance shall such reduction exceed 15 per cent. (15%) of the price of the affected Products. Upon repair, replacement or price reduction being made as aforesaid, the Customer shall have no further claim against Seller.<br>
+
+6.4 Replacement Products: When Seller has provided replacement Products or given the Customer a refund, the non-conforming Products or parts thereof shall become Seller’s property and upon request such Products or parts thereof should be shipped back to Seller.<br>
+
+6.5 Risk of damage or loss: Risk of damage to or loss of the Products shall pass to the Customer at the time of delivery, or if the Customer wrongfully fails to take delivery of the Products, the time when Seller has tendered delivery of the Products.<br>
+
+6.6 In cases where the customer refuses to take possession of the product without sufficient cause or justification, or returns the item without sufficient cause or justification, as provided under Clause 6, BidLix will safely keep the item for a period of fifteen (15) days, reckoned from the date BidLix receives the product from customer. After the lapse of such period, the product or item is deemed abandoned by customer or Seller may dispose of the product or item. Notwithstanding the foregoing, BidLix will use its best efforts to return the product to the Customer within the time frame provided.<br>
+
+7. Questions and complaints<br>
+
+If you have any questions or complaints, please contact BidLix using the email: aisiah.tirona@gmail.com. BidLix will liaise with Sellers on your questions and complaints.<br>
+8. Termination
+<br>
+
+8.2 Cancellation by Seller: Without prejudice to any other right of termination elsewhere in these Terms & Conditions of Sale, Seller, may stop any Products in transit, suspend further deliveries to the Customer and/or terminate the Customer Contract with immediate effect by written notice to the Customer on or at any time after the occurrence of any of the following events:<br>
+
+8.2.1 the Products under the Customer Contract being unavailable for any reason;<br>
+8.2.2 the Customer being in breach of an obligation under the Customer Contract;<br>
+8.2.3 the Customer passing a resolution for its winding up or a court of competent jurisdiction making an order for the Customer’s winding up or dissolution;<br>
+8.2.4 the making of an administration order in relation to the Customer or the appointment of a receiver over or an encumbrancer taking possession of or selling any of the Customer’s assets; or<br>
+8.2.5 the Customer making an arrangement or composition with its creditors generally or applying to a Court of competent jurisdiction for protection from its creditors.<br>
+9. Risk and property of the Goods<br>
+
+9.1 Risk of damage to or loss of the Goods shall pass to the Customer at the time of delivery or if the Customer wrongfully fails to take delivery of the Goods, the time when BidLix has tendered delivery of the Goods.<br>
+
+9.2 Notwithstanding delivery and the passing of risk in the Goods or any other provision of these Conditions the property in the Goods shall not pass to the Customer until BidLix has received in cash or cleared funds payment in full of the price of the Goods and all other goods agreed to be sold by BidLix to the Customer for which payment is then due.
+<br>
+9.3 Until such time as the property in the Goods passes to the Customer, the Customer shall hold the Goods as BidLix fiduciary agent and bailee and shall keep the Goods separate from those of the Customer.<br>
+
+9.4 The Customer agrees with BidLix that the Customer shall immediately notify seller of any matter from time to time affecting BidLix is title to the Goods and the Customer shall provide Seller with any in-formation relating to the Goods as BidLix may require from time to time.<br>
+
+9.5 Until such time as the property in the Goods passes to the Customer (and provided the Goods are still in existence and have not been resold) Buyer shall be entitled at any time to demand the Seller to deliver up the Goods to Bidder and in the event of non-compliance BidLix reserves it’s right to take legal action against the Customer for the delivery up the Goods and also reserves its right to seek damages and all other costs including but not limited to legal fees against the Customer.<br>
+
+9.6 The Customer shall not be entitled to pledge or in any way charge by way of security for any indebtedness any of the Goods which remain the property of BidLix but if the Customer does so all moneys owing by the Customer to BidLix shall (without prejudice to any other right or remedy of BidLix) forthwith become due and payable.<br>
+
+9.7 If the provisions in this Condition 9 are not effective according to the law of the country in which the Goods are located, the legal concept closest in nature to retention of title in that country shall be deemed to apply mutatis mutandis to give effect to the underlying intent expressed in this condition, and the Customer shall take all steps necessary to give effect to the same.<br>
+
+9.8 The Customer shall indemnify BidLix, all of its respective officers, employees, directors, agents and contractors against all loss damages costs expenses and legal fees incurred by the Customer in connection with the assertion and enforcement of BidLix rights under this condition.<br>
+<br>
+10. Limitation of liability
+
+10.1 Sole remedies of customer: The remedies set out in Clause 6 are the Customer’s sole and exclusive remedies for non-conformity of or defects in the products.<br>
+
+10.2 Maximum Liability: Notwithstanding any other provision of these terms & conditions of sale, Seller’s maximum cumulative liability to you or to any other party for all losses under, arising out of or relating to the sale of products under each customer contract, will not exceed the sums that you have paid to Seller under such customer contract.
+<br>
+10.3 Exclusion of liability: BidLix indemnitees shall not be liable to you for any losses whatsoever or howsoever caused (regardless of the form of action) arising directly or indirectly in connection with: (i) amounts due from other users of the platform in connection with the purchase of any product; (ii) the sale of the products to you, or its use or resale by you; and (iii) any defect arising from fair wear and tear, wilful damage, misuse, negligence, accident, abnormal storage and or working conditions, alteration or modification of the products or failure to comply with Seller’s instructions on the use of the products (whether oral or written).<br>
+
+11. General<br>
+
+11.1 References to “BidLix”: References to “BidLix” in these Terms and Conditions of Sale apply both to Bidlix actions on its own behalf as Seller and/or as the operator of the Platform or as the agent of Third Party Vendors as Sellers in respect of each and every Customer Contract.<br>
+
+11.2 Right to subcontract: Third Party Vendors or Sellers shall be entitled to delegate and/or subcontract any rights or obligations under these Terms & Conditions of Sale to BidLix or any of BidLix designated service providers, subcontractors and/or agents.<br>
+
+11.3 Cumulative rights and remedies: Unless otherwise provided under these Terms & Conditions of Sale, the provisions of these Terms & Conditions of Sale and Seller’s rights and remedies under these Terms & Conditions of Sale are cumulative and are without prejudice and in addition to any rights or remedies Seller may have in law or in equity, and no exercise by Seller of any one right or remedy under these Terms & Conditions of Sale, or at law or in equity, shall (save to the extent, if any, provided expressly in these Terms & Conditions of Sale or at law or in equity) operate so as to hinder or prevent Seller’s exercise of any other such right or remedy as at law or in equity.<br>
+
+11.4 Warranties: The implied warranty under the New Civil Code of the Philippines against hidden defects and the rights of a consumer under Title III, Chapter III of the Consumer Act of the Philippines shall apply.
+<br>
+11.5 No waiver: Seller’s failure to enforce these Terms & Conditions of Sale shall not constitute a waiver of these terms, and such failure shall not affect the right later to enforce these Terms & Conditions of Sale. Seller would still be entitled to use its rights and remedies in any other situation where you breach these Terms & Conditions of Sale.
+<br>
+11.6 Severability: If at any time any provision of these Terms & Conditions of Sale shall be or shall become illegal, invalid or unenforceable in any respect, the legality, validity and enforceability of the remaining provisions of this Agreement shall not be affected or impaired thereby, and shall continue in force as if such illegal, invalid or unenforceable provision was severed from these Terms & Conditions of Sale.<br>
+
+11.7 Rights of third parties: A person or entity who is not a party to these Terms & Conditions of Sale shall have no right under any legislation in any jurisdiction to enforce any term of these Terms & Conditions of Sale, regardless of whether such person or entity has been identified by name, as a member of a class or as answering a particular description. For the avoidance of doubt, nothing in this Clause shall affect the rights of any permitted assignee or transferee of these Terms & Conditions of Sale.<br>
+
+11.8 Governing law: These Terms & Conditions of Sale shall be governed by, and construed in accordance with the laws of Philippines and you hereby submit to the exclusive jurisdiction of the Courts of Makati City in the Philippines.<br>
+
+11.9 Except as provided for in Clause 11.8, any dispute, controversy, or claim arising out of or relating to this terms and conditions, or the breach, termination or invalidity thereof shall be settled through arbitration under Republic Act 9285 or the Alternative Dispute Resolution Act of 2004. .<br>
+
+11.10 Injunctive relief: Seller may seek immediate injunctive relief if Seller makes a good faith determination that a breach or non-performance is such that a temporary restraining order or other immediate injunctive relief is the only appropriate or adequate remedy.<br>
+
+11.11 Amendments: Seller may by notice issued jointly with BidLix through the Platform or by such other method of notification as Seller may designate solely through BidLix (which may include notification by way of e-mail), vary the terms and conditions of these Terms & Conditions of Sale, such variation to take effect on the date Seller specifies through the above means. If you use the Platform or the Services after such date, you are deemed to have accepted such variation. If you do not accept the variation, you must stop access or using the Platform and the Services and terminate these Terms & Conditions of Sale. Seller’s right to vary these Terms & Conditions of Sale in the manner aforesaid will be exercised with the joint involvement of BidLix(either via the Portal or such other means as BidLix prescribes) and subject to the foregoing, may be exercised without the consent of any person or entity who is not a party to these Terms & Conditions of Sale. The version of Terms & Conditions of Sale applicable to any particular Order is the latest version in force.<br>
+
+11.12 Correction of errors: Any typographical, clerical or other error or omission in any acceptance, invoice or other document on Seller’s part shall be subject to correction without any liability on Seller’s part.<br>
+
+11.13 Currency: Money references under these Terms & Conditions of Sale shall be in Philippines Pesos.<br>
+
+11.14 Language: In the event that these Terms & Conditions of Sale is executed or translated in any language other than English (“Foreign Language Version”), the English language version of these Terms & Conditions of Sale shall govern and shall take precedence over the Foreign Language Version.<br>
+
+11.15 Entire agreement: These Terms & Conditions of Sale shall constitute the entire agreement between you and Seller relating to the subject matter hereof and supersedes and replaces in full all prior understandings, communications and agreements with respect to the subject matter hereof.<br>
+
+11.16 Binding and conclusive: You acknowledge and agree that any records (including records of any telephone conversations relating to the Services, if any) maintained by Seller or its service providers relating to or in connection with the Platform and Services shall be binding and conclusive on you for all purposes whatsoever and shall be conclusive evidence of any information and/or data transmitted between Seller and you. You hereby agree that all such records are admissible in evidence and that you shall not challenge or dispute the admissibility, reliability, accuracy or the authenticity of such records merely on the basis that such records are in electronic form or are the output of a computer system, and you hereby waive any of your rights, if any, to so object.<br>
+
+11.17 Subcontracting and delegation: BidLix reserves the right to delegate or subcontract the performance of any of its functions in connection with the performance of its obligations under these Terms & Conditions of Sale and reserves the right to use any service providers, subcontractors and/or agents on such terms as BidLix deems appropriate.<br>
+
+11.18 Assignment: You may not assign your rights under these Terms & Conditions of Sale without Seller’s prior written consent. Seller may assign its rights under these Terms & Conditions of Sale to any third party.<br>
+
+11.19 Force Majeure: Neither BidLix nor Seller shall be liable for non-performance, error, interruption or delay in the performance of its obligations under these Terms & Conditions of Sale (or any part thereof) or for any inaccuracy, unreliability or unsuitability of the Platform's and/or Services’ contents if this is due, in whole or in part, directly or indirectly to an event or failure which is beyond BidLix’s or Seller’s reasonable control.<br>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <div id="divScript"></div>
+
+
+
+  <script>
+  $(document).ready(function(){
+    var user = localStorage.getItem('localUser');
+    var rec = localStorage.getItem('Sell');
+
+    $("#txtSender").val(user);
+    $("#txtReciever").val(rec);
+
+    $("#profileContainer").hide();
+    $("#ItemContainer").hide();
+    $("#MessageContainer").hide();
+
+        //============ Function to show user profile pic on heaader 
+
+    if(localStorage.getItem('localUser') != "") {
+        $("#Nonheaderpic").hide();
+        $("#Headerpic").show();
+
+      }
+      else{
+        $("#Nonheaderpic").show();
+        $("#Headerpic").hide();
+
+      }
+
+        $.ajax({
+        type:'POST',
+        url:'http://gcccs.org/largo/best/userpic.php',
+        dataType:'html',
+        data:{
+          sql: user
+        },
+        success:function(data){
+          if(data){
+            $('#Headerpic').html(data);
+          }
+        }
+      });
+    //============ Function to show user profile pic on heaader 
+
+    if((localStorage.getItem('localUser') == "BidLix_Admin") && (localStorage.getItem('localPass') == "bidlixAdmin123")){
+      $("#divAdmin").show();
+    }
+    else {
+      $("#divAdmin").hide();
+    }
+
+      $.ajax({
+      type: 'POST',
+      url:'http://gcccs.org/largo/best/ReadMessage.php',
+      dataType:'html',
+      data: {sql: user},
+      success: function(data){
+        if(data){
+          $('#divReadMessage').html(data); 
+             
+        }
+      }
+    });
+
+      $.ajax({
+      type: 'POST',
+      url:'http://gcccs.org/largo/best/message.php',
+      dataType:'html',
+      data: {sql: user},
+      success: function(data){
+        if(data){
+          $('#divMessage').html(data);  
+          var e = $('#divMessage > div').length;
+          $('#msgbadgeP').html(e);
+           
+        }
+      }
+    });
+
+    
+
+
+    $("#btnProfile").click(function(){
+      $("#profileContainer").hide();
+      $("#divProfileMenu").show();
+      $("#ItemContainer").hide();
+      $("#MessageContainer").hide();
+
+    });
+
+    $("#divUser").click(function(){
+      
+      $("#profileContainer").show();
+      $("#divProfileMenu").hide();
+
+        $.ajax({
+        type:'POST',
+        url:'http://gcccs.org/largo/best/profile.php',
+        dataType:'html',
+        data:{
+          sql: user
+        },
+        success:function(data){
+          if(data){
+            $('#divProfile').html(data);
+          }
+        }
+      });
+
+      if(localStorage.getItem('localUser') != "") {
+        $("#NonUser").hide();
+        $("#divProfile").show();
+        $("#Nonheaderpic").hide();
+        $("#Headerpic").show();
+
+      }
+
+      else{
+        $("#NonUser").show();
+        $("#Nonheaderpic").show();
+         $("#divProfile").hide();
+
+      }
+
+    });
+
+        
+    
+    /////===================== function to show user selling item
+    $('#divSell').click(function(){
+      $("#profileContainer").hide();
+      $("#divProfileMenu").hide();
+      $("#MessageContainer").hide();
+      $("#ItemContainer").show();
+
+      var user = localStorage.getItem('localUser');
+
+      if(user !=""){
+      $.ajax({
+      type: 'GET',
+      url:'http://gcccs.org/largo/best/largosell.php',
+      dataType:'html',
+      data: {sql: user},
+      success: function(data){
+        if(data){
+          $('#divItem').html(data);    
+        }
+      }
+    });
+    }
+    else{
+      alert("Please login your user first.");
+    }
+    });
+    //===================== function to show user selling item.
+
+
+    //===================== function to show user sold item.
+    $('#divSold').click(function(){
+      $("#profileContainer").hide();
+      $("#divProfileMenu").hide();
+      $("#MessageContainer").hide();
+      $("#ItemContainer").show();
+
+      var user = localStorage.getItem('localUser');
+
+      if(user != ""){
+      $.ajax({
+      type: 'GET',
+      url:'http://gcccs.org/largo/best/sold.php',
+      dataType:'html',
+      data: {sql: user},
+      success: function(data){
+        if(data){
+          $('#divItem').html(data);    
+        }
+      }
+    });
+      }
+    else{
+      alert("Please login your user first.");
+    }
+    });
+    //===================== function to show user sold item.
+
+
+    //===================== function to show user pending item.
+    $('#divPending').click(function(){
+      $("#profileContainer").hide();
+      $("#divProfileMenu").hide();
+      $("#MessageContainer").hide();
+      $("#ItemContainer").show();
+
+      var user = localStorage.getItem('localUser');
+      if(user != ""){
+      $.ajax({
+      type: 'POST',
+      url:'http://gcccs.org/largo/best/largopending.php',
+      dataType:'html',
+      data: {sql: user},
+      success: function(data){
+        if(data){
+          $('#divItem').html(data);    
+        }
+      }
+    });
+    }
+    else{
+      alert("Please login your user first.");
+    }
+    });
+
+    //===================== function to show user pending item.
+    //=================message div function
+
+    $('#divMessageRec').click(function(){
+      $("#profileContainer").hide();
+      $("#divProfileMenu").hide();
+      $("#MessageContainer").show();
+      $("#ItemContainer").hide();
+
+      var user = localStorage.getItem('localUser');
+      if(user != ""){
+      $.ajax({
+      type: 'POST',
+      url:'http://gcccs.org/largo/best/ReadMessage.php',
+      dataType:'html',
+      data: {sql: user},
+      success: function(eliza){
+        if(eliza){
+          $('#divMessageRead').html(eliza);    
+        }
+      }
+    });
+
+      $.ajax({
+      type: 'POST',
+      url:'http://gcccs.org/largo/best/message.php',
+      dataType:'html',
+      data: {sql: user},
+      success: function(data){
+        if(data){
+          $('#divMessage').html(data);    
+        }
+      }
+    });
+    }
+    else{
+      alert("Please login your user first.");
+    }
+
+      
+      
+ 
+    });
+    //=================message div function
+
+    //=================function to view bought item===============
+    $('#divBought').click(function(){
+      $("#profileContainer").hide();
+      $("#divProfileMenu").hide();
+      $("#MessageContainer").hide();
+      $("#ItemContainer").show();
+
+      user = localStorage.getItem('localUser');
+      if(user != ""){
+      $.ajax({
+        type: 'POST',
+        url:'http://gcccs.org/largo/best/agreebought.php',
+        dataType:'html',
+        data: {sql:user},
+        success: function(data){
+          if(data){
+            $('#divItem').html(data);    
+          }
+        }
+      });
+    }
+    else{
+      alert("Please login your user first.");
+    }
+  }); 
+    //=================function to view bought item===============
+
+    //=================function to view item for buying
+    $('#divBuy').click(function(){
+      $("#profileContainer").hide();
+      $("#divProfileMenu").hide();
+      $("#ItemContainer").show();
+      $("#MessageContainer").hide();
+
+      user = localStorage.getItem('localUser');
+      if(user != ""){
+      $.ajax({
+        type: 'POST',
+        url:'http://gcccs.org/largo/best/largobought.php',
+        dataType:'html',
+        data: {sql:user},
+        success: function(data){
+          if(data){
+            $('#divItem').html(data);    
+          }
+        }
+      });
+    }
+    else{
+      alert("Please login your user first.");
+    }
+    });
+    //=================end function to view item to buy
+
+  //==========End function for admin link ===========
+    $("#btnMessage").click(function(){
+      var mesform = $('#frmMessage').serialize();
+      $.ajax({
+        type:'POST',
+        url:'http://gcccs.org/largo/best/SendMessage.php',
+        data:mesform,
+        dataType:'html',
+        success: function(mes){
+          if(mes == 'yes'){
+            alert("You have successfully send your message.");
+            location.href="profile.html";
+          }
+          else{
+            alert("Error");
+          }
+
+        }
+      });
+    });
+  // ======== End function to send message to your buyer ======
+
+
+  //========== function to confirm item agreemet
+  $("#btnAgreeTerm").click(function(){
+
+     var id = localStorage.getItem("ConfirmItem");
+     if($('#chkterm').prop('checked') == true){
+        
+        $.ajax({
+          type: 'POST',
+          data :{a:id},
+          url:'http://gcccs.org/largo/best/AgreeItem.php',
+          success : function(term){
+            if(term){
+              alert("Thank you for buying this item.");
+              location.reload();
+            }
+          }
+        });
+
+      var sender = 'BidLix_Admin';
+      var receiver = localStorage.getItem('TermUser');
+      var mes = "Good day, BidLix just want to notify you that your item is already confirmed by the buyer.";
+
+        $.ajax({
+        type:'POST',
+        url:'http://gcccs.org/largo/best/SendMessage.php',
+        data:"txtSender="+sender+"&txtReciever="+receiver+"&txtmesContent="+mes,
+        dataType:'html',
+        success: function(mes){
+          if(mes == 'yes'){
+            location.href="profile.html";
+          }
+          else{
+            alert("Error");
+          }
+
+        }
+      });
+    }
+
+    else{
+      alert("Please agree with the terms and condition.");
+    }
+  })
+  ////===============END 
+
+
+  //================= START FUNCTION ADD TERMS AND CONDITION
+  $('#btnAddterm').click(function(){
+
+    var form = $('#formterm').serialize();
+    var time = $('#time1').val() + ":" + $('#time2').val() + " " +$('#slcTime').val();
+    console.log(time); 
+     if($('#terms').prop('checked') == true){
+        
+        $.ajax({
+        type: 'POST',
+        data: form + "&time="+time,
+        dataType: 'html',
+        url: 'http://gcccs.org/largo/best/AddAgree.php',
+        success: function(agree){
+            if(agree == 'yes'){
+              alert("You have successfully add terms and condition.");
+              location.href="profile.html";
+            }
+            else{
+              alert("Error");
+            }
+
+          }
+      });
+
+      }
+      else{
+        alert("Please agree with the terms and condition.");
+      }
+  
+  });
+  //================= END FUNCTION ADD TERMS AND CONDITION
+
+
+
+
+  });
+
+
+
+  // ================= function to logout
+  function logout(){
+  location.reload();
+  location.href="index.html";
+    localStorage.setItem('localUser','')
+    localStorage.setItem('localPass','')
+  }
+  // ================= function to logout
+
+  // ================= function to show waiting to approve item
+  (function loadApprove(){
+    $.ajax({
+      type : 'GET',
+      url : 'http://gcccs.org/largo/best/approveuser.php',
+      success : function (data){
+         if (data){
+          $("#divUserRec").html(data);
+        }
+      }
+    });
+  })();
+  // ================= function to show waiting to approve item
+
+  // ================= function to show waiting to approve item
+  function loadApproveItem(){
+    $.ajax({
+      type : 'GET',
+      dataType:'html',
+      url : 'http://gcccs.org/largo/best/approveItem.php',
+      success : function (data){
+         if (data){
+          $("#divItemRec").html(data);
+        }
+      }
+    });
+  }
+  // ================= function to show waiting to approve item
+
+
+
+  //=========== function to load suggest records
+  function loadSuggest(){
+    $.ajax({
+      type : 'GET',
+      url : 'http://gcccs.org/largo/best/SuggestRec.php',
+      dataType: 'html',
+      success : function (data){
+         if (data){
+          $("#divSuggRec").html(data);
+        }
+      }
+    });
+  }
+
+  // ================= function to show SELL YOUR ITEM
+     function SellSuggest(id){
+      $.ajax({
+        type : 'POST',
+        url: 'http://gcccs.org/largo/best/SellItem.php',
+        data: {
+        sql:id
+      },
+        success : function(data){
+          if(data){
+            $("#divSellItem").append(data);
+            var item = document.getElementById('sampleSell').innerHTML = nameItem;
+            var price = document.getElementById('samplePrice').innerHTML = priceItem;
+
+            localStorage.setItem('Sell',item);
+            localStorage.setItem('Price',price);
+            var eliza = localStorage.getItem('Sell');
+            var a = localStorage.getItem('Price');
+            var post = localStorage.getItem('post_id');
+ 
+            $.ajax({
+              type : 'POST',
+              url : 'http://gcccs.org/largo/best/sell.php',
+              data :"Sell="+eliza+"&Price="+a+"&postId="+post,
+              dataType: 'html',
+              success : function(bidlix){
+                if(bidlix){
+                alert('Successfully send to buyer and wait for confirmation.');                }
+              }
+            });
+            var sender = localStorage.getItem('localUser');
+            var receiver = localStorage.getItem('Sell');
+            var mes = "Good day,"+sender+" choose you to buy his/her item. Thank you.";
+
+              $.ajax({
+              type:'POST',
+              url:'http://gcccs.org/largo/best/SendMessage.php',
+              data:"txtSender="+sender+"&txtReciever="+receiver+"&txtmesContent="+mes,
+              dataType:'html',
+              success: function(mes){
+                if(mes == 'yes'){
+                  console.log("Send message to buyer.");
+                }
+              }
+            });
+        }
+        alert("You choose "+eliza+" to buy your item. Click Notify your user.");
+        }
+      });
+
+    } 
+    //============== FUNCTION TO SELL YOUR ITEM
+
+
+    // ======== Start function to send message to your buyer ======
+      function lnkMessage(id){
+      var user = localStorage.getItem('localUser');
+      document.getElementById("txtSender").value = user;
+
+      $.ajax({
+        type : 'POST',
+        url: 'http://gcccs.org/largo/best/SellItem.php',
+        data: {
+        sql:id
+      },
+        success : function(data){
+          if(data){
+            $("#divSellItem").append(data);
+            var rec = document.getElementById('txtReciever').value = nameItem;
+            localStorage.setItem('Reciever',rec);
+            var eliza = localStorage.getItem('Sell');
+            var post = localStorage.getItem('post_id');
+        }
+        }
+      });
+
+      }
+      // ======== End function to send message to your buyer ======
+
+      //============ OWNER CAN MESSAGE THE SELLER
+      function MessageOwner(id){
+      var user = localStorage.getItem('localUser');
+      document.getElementById("txtSender").value = user;
+
+      $.ajax({
+        type : 'POST',
+        url: 'http://gcccs.org/largo/best/messageOwner.php',
+        data: {
+        sql:id
+      },
+        success : function(data){
+          if(data){
+            $("#divSellItem").append(data);
+            var rec = document.getElementById('txtReciever').value = nameUser;
+            localStorage.setItem('Reciever',rec);
+            var eliza = localStorage.getItem('Sell');
+            var post = localStorage.getItem('post_id');
+        }
+        }
+      });
+
+      }
+       //============ OWNER CAN MESSAGE THE SELLER
+
+
+      //============= SELLER CAN CONFIRM THE ITEM
+    function confirmitem(id){
+      var a = id;
+      localStorage.setItem("ConfirmItem", id);
+      $.ajax({
+      type: 'GET',
+      dataType: 'html',
+      data :{
+        sql:id
+      },
+      url:'http://gcccs.org/largo/best/terms.php',
+      success : function(term){
+        if(term){
+        document.getElementById("divTermsRec").innerHTML = term;
+        }
+
+      }
+      });
+
+      $.ajax({
+        type: 'GET',
+        dataType:'html',
+        data:{sql:a},
+        url:'http://gcccs.org/largo/best/termUser.php',
+        success:function(eliza){
+          if(eliza){
+            $("#divTermsUser").append(eliza);
+            var rec = document.getElementById('txtReciever').value = TermUser;
+            localStorage.setItem('TermUser',rec);
+
+          }
+
+        }
+      }); 
+
+    }
+     //============= SELLER CAN CONFIRM THE ITEM
+
+      //============= SELLER CAN VIEW THE TERMS AND CONDITION
+    function viewterms(id){
+      var a = id;
+      localStorage.setItem("ConfirmItem", id);
+      $.ajax({
+      type: 'GET',
+      dataType: 'html',
+      data :{
+        sql:id
+      },
+      url:'http://gcccs.org/largo/best/terms.php',
+      success : function(term){
+        if(term){
+        document.getElementById("divViewTerms").innerHTML = term;
+        }
+
+      }
+      });
+    }
+    //============= SELLER CAN VIEW THE TERMS AND CONDITION
+
+
+    // ============ FUNCTION TO DECLINE ITEM(SAVE THE ITEM ID)
+    function declineitem(id){
+      localStorage.setItem("DeclineItem", id); 
+      
+    }
+    // ============ FUNCTION TO DECLINE ITEM(SAVE THE ITEM ID)
+
+    var controller = {
+      //================= function to decline the item 
+      decline : function(){
+        var id = localStorage.getItem('DeclineItem');
+        var sender = 'BidLix_Admin';
+        var receiver = localStorage.getItem('TermUser');
+        var mes = "Good day, BidLix just want to inform you that your item has been decline by buyer.";
+        
+        $.ajax({
+          type: 'POST',
+          data :{a:id},
+          url:'http://gcccs.org/largo/best/decline.php',
+          success : function(term){
+            if(term){
+              alert("Successfully decline this item.");
+              location.reload();
+            }
+          }
+        });
+
+        $.ajax({
+        type:'POST',
+        url:'http://gcccs.org/largo/best/SendMessage.php',
+        data:"txtSender="+sender+"&txtReciever="+receiver+"&txtmesContent="+mes,
+        dataType:'html',
+        success: function(mes){
+          if(mes == 'yes'){
+            location.href="profile.html";
+          }
+          else{
+            alert("Error");
+          }
+
+        }
+      });
+      },
+      //================= function to decline the item 
+
+      //================= function to delete suggest 
+      DeleteSuggest : function(id){
+        var c = id;
+        $.ajax({
+          type : 'POST',
+          url : 'http://gcccs.org/largo/best/deleteSuggest.php',
+          data : {a:c},
+          success : function(bidlix){
+            if(bidlix != "Successfully deleted"){
+              alert('Successfully deleted');
+              location.reload();
+            }
+          }
+        });
+      },
+      //================= function to delete suggest
+
+    //================= function to approve item 
+    ApproveItem : function(data){
+      var c = data;
+      $.ajax({
+        type : 'POST',
+        url : 'http://gcccs.org/largo/best/approvedItem.php',
+        data : {a : c},
+        success : function(bidlix){
+          if(bidlix){
+          alert("Successfully proved this item.");
+          location.reload();
+          }
+        }
+      }); 
+    },
+    //================= function to approve item 
+
+    //================= function to delete item 
+    DeleteItem : function(data){
+      var c = data;
+      $.ajax({
+        type : 'POST',
+        url : 'http://gcccs.org/largo/best/deleteItem.php',
+        data : {a : c},
+        success : function(bidlix){
+          if(bidlix != "Successfully deleted"){
+              alert('Successfully deleted');
+              location.reload();
+            }
+        }
+      });
+    },
+    //================= function to delete item 
+
+    //================= function to approve user 
+     ApproveUser : function(data){
+      var c = data;
+      $.ajax({
+        type : 'POST',
+        url : 'http://gcccs.org/largo/best/approved.php',
+        data : {a : c},
+        success : function(bidlix){
+          if(bidlix){
+          alert('Successfully Approve.');
+          location.reload();
+          }
+        }
+      }); 
+    },
+    //================= function to approve user 
+
+
+    //================= function to decline user 
+     DeleteUser:function (data){
+      var c = data;
+      $.ajax({
+        type : 'POST',
+        url : 'http://gcccs.org/largo/best/deleteuser.php',
+        data : {a : c},
+        success : function(bidlix){
+          if(bidlix != "Successfully deleted"){
+              alert('Successfully deleted');
+              location.reload();
+            }
+        }
+      });
+    },
+    //================= function to decline user 
+
+    //================= function to delete message
+    deleteMsg:function (id){
+      localStorage.setItem('DeleteMes',id);
+      var c = id;
+      $.ajax({
+        type : 'POST',
+        url : 'http://gcccs.org/largo/best/deletemsg.php',
+        data : {a : c},
+        success : function(bidlix){
+          if(bidlix != "Successfully deleted"){
+              alert('Successfully deleted');
+              location.reload();
+            }
+        }
+      });
+    }
+    //================= function to delete message
+
+    } 
+
+    function termsfunction(a){
+      localStorage.setItem('TermsAdd', a);
+      document.getElementById('txtItem').value = localStorage.getItem('TermsAdd');
+      document.getElementById('txtName').value = localStorage.getItem('localUser');
+    }
+
+    // ============== FUNCTION TO OPEN MESSAGE
+    function openMsg(id){
+      localStorage.setItem('OpenMes',id);
+      $.ajax({
+        type: 'GET',
+        data:{sql:id},
+        dataType: 'html',
+        url: 'http://gcccs.org/largo/best/OpenMes.php',
+        success: function(mes){
+            if(mes){
+              $('#divOpenMes').html(mes);
+          }
+        }
+      });
+      
+  }
+  // ============== FUNCTION TO OPEN MESSAGE
+
+  // ============== FUNCTION TO UPDATE MESSAGE
+  function updateMesStatus(){
+    var c = localStorage.getItem('OpenMes');
+      $.ajax({
+        type : 'POST',
+        url : 'http://gcccs.org/largo/best/UpdateOpenMes.php',
+        data : {a : c},
+        success : function(bidlix){
+          if(bidlix){
+            location.reload();
+          }
+        }
+      });
+
+  }
+   // ============== FUNCTION TO UPDATE MESSAGE
+  //================= CLOSE FUNCTION TO VIEW MESSAGE CONTENT
+
+
+  
+  </script>
+  <div id="divSellItem"></div>
+  <div id="divSender"></div>
+  <div id="divTermsUser"></div>
+
+
+
+</body>
+</html>
